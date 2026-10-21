@@ -138,6 +138,10 @@ section{padding-top:36px;display:grid;gap:16px}
 /* Alojamientos */
 .stays{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
 .stay{background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--cc);border-radius:12px;padding:16px;display:grid;gap:10px;align-content:start;min-width:0}
+.stay-photos{display:grid;grid-template-columns:2fr 1fr;grid-template-rows:1fr 1fr;gap:4px;height:200px;margin:-16px -16px 2px;overflow:hidden;text-decoration:none;background:var(--sunk)}
+.stay-photos img{width:100%;height:100%;object-fit:cover;display:block;min-width:0;min-height:0}
+.stay-photos img:first-child{grid-row:1 / span 2}
+.stay-photos.n1{grid-template-columns:1fr}.stay-photos.n2 img:first-child{grid-row:1 / span 2}
 .stay-top{display:flex;justify-content:space-between;gap:8px;align-items:start}
 .stay h3{font-size:19px;line-height:1.25}
 .stay .when{font-family:var(--f-mono);font-size:13.5px;color:var(--muted)}
@@ -341,20 +345,21 @@ const EUR_USD=1.12294; /* cotización del 20/10/2026 */
 
 /* status: paid | pending | estimate | unknown */
 const STAYS=[
-  {id:'hostel',city:'madrid',name:'Cats Hostel Madrid',kind:'Hostel (reserva por Hostelworld)',in:'2026-10-31',out:'2026-11-01',people:ALL,total:309.30,deposit:59.05,status:'pending',when:'nov',card:'Caro',
+  {id:'hostel',photos:["https://a.hwstatic.com/image/upload/f_auto,q_auto,h_600,c_limit/propertyimages/6/6657/dtqdan9hkcb5fmherprl.jpg", "https://a.hwstatic.com/image/upload/f_auto,q_auto,h_600,c_limit/propertyimages/6/6657/ya1lftc07o1jkye2mjvw.jpg", "https://a.hwstatic.com/image/upload/f_auto,q_auto,h_600,c_limit/propertyimages/6/6657/ntwowx0nvt1yzmwfz6qy.jpg"],city:'madrid',name:'Cats Hostel Madrid',kind:'Hostel (reserva por Hostelworld)',in:'2026-10-31',out:'2026-11-01',people:ALL,total:309.30,deposit:59.05,status:'pending',when:'nov',card:'Caro',
    url:'https://www.hostelworld.com/hostels/p/6657/cats-hostel-madrid-sol/',address:'Cañizares 6, 28012 Madrid',checkin:'14:00 a 23:00',checkout:'11:00',
    ref:'6657-579481518',rooms:'6 camas.',cancel:'29/10',note:'Recepción abierta las 24 horas. Guardan valijas el día de salida por €2.'},
-  {id:'mad1',city:'madrid',name:'Airbnb Madrid · Departamento Culture',kind:'Airbnb',in:'2026-11-01',out:'2026-11-03',people:ALL,total:542,status:'pending',when:'nov',card:'Tili',
+  {id:'mad1',photos:["https://a0.muscache.com/im/pictures/BnbProperty/BnbProperty-1715261524743776174/original/e6620651-f64c-449f-b541-4c90229de962.jpeg?im_w=720", "https://a0.muscache.com/im/pictures/BnbProperty/BnbProperty-1715261524743776174/original/9baa02aa-bc31-47a1-8bb8-f4e9782843ed.jpeg?im_w=720", "https://a0.muscache.com/im/pictures/BnbProperty/BnbProperty-1715261524743776174/original/e8fcf211-d29c-4e06-82c8-28bc7d94d782.jpeg?im_w=720"],city:'madrid',name:'Airbnb Madrid · Departamento Culture',kind:'Airbnb',in:'2026-11-01',out:'2026-11-03',people:ALL,total:542,status:'pending',when:'nov',card:'Tili',
    url:'https://www.airbnb.com.ar/rooms/1622518157561245467/room-details?room_id=1622518157561245467',address:'Calle de Hernán Cortés 12, 28004 Madrid',checkin:'15:00',checkout:'11:00',
    rooms:'4 dormitorios, 4 camas y 1 sofá cama. 2 baños.',cancel:'27/10'},
-  {id:'paris',city:'paris',name:'Airbnb París · Rue Blondel',kind:'Airbnb',in:'2026-11-03',out:'2026-11-06',people:ALL,total:827,status:'pending',when:'nov',card:'Tili',
-   url:'https://www.airbnb.com.ar/rooms/1313668058348622363',address:'32 Rue Blondel, 75002 París',checkin:'16:00',checkout:'11:00',
-   rooms:'3 dormitorios, cada uno con 1 cama doble. 1 baño.',cancel:'2/11',note:'Entrada autónoma con caja de llaves.'},
-  {id:'roma',city:'roma',name:'Airbnb Roma · Calpurnia House',kind:'Airbnb',in:'2026-11-06',out:'2026-11-09',people:ALL,total:693,status:'pending',when:'nov',card:'Tili',
+  {id:'paris',photos:["https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6Njg4Mjg3NzQ0Nzg5MTkzNjk0/original/c59c5dce-e99a-436d-ae01-81284ae217c1.jpeg?im_w=720", "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6Njg4Mjg3NzQ0Nzg5MTkzNjk0/original/de0dc847-17e3-4634-8473-4c080b0ed57c.jpeg?im_w=720", "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6Njg4Mjg3NzQ0Nzg5MTkzNjk0/original/ec8179f2-51db-4ab6-8eea-3049042a3d7e.jpeg?im_w=720"],city:'paris',name:'Airbnb París · Merveil Louvre',kind:'Airbnb',in:'2026-11-03',out:'2026-11-06',people:ALL,total:958.45,status:'pending',when:'nov',card:'Caro',
+   url:'https://www.airbnb.com.ar/rooms/688287744789193694',address:'27 Rue Jean-Jacques Rousseau, 75001 París',checkin:'16:00',checkout:'11:00',
+   rooms:'2 dormitorios: uno con cama queen y otro con cama doble. Sofá cama para dos en el living. 1 baño con ducha y un toilette aparte.',cancel:'2/11',
+   note:'Entrada autónoma: las llaves están en una caja con código, que el anfitrión manda unos 5 días antes. Primer piso por escalera (unos 15 escalones, sin ascensor). Las reglas de la casa quedan en la mesa de la cocina.'},
+  {id:'roma',photos:["https://a0.muscache.com/im/pictures/1103228/bb66a513_original.jpg?im_w=720", "https://a0.muscache.com/im/pictures/28892866/27ab9033_original.jpg?im_w=720", "https://a0.muscache.com/im/pictures/28892911/e8aba3be_original.jpg?im_w=720"],city:'roma',name:'Airbnb Roma · Calpurnia House',kind:'Airbnb',in:'2026-11-06',out:'2026-11-09',people:ALL,total:693,status:'pending',when:'nov',card:'Tili',
    url:'https://www.airbnb.com.ar/rooms/163008',address:'Via di San Giovanni in Laterano 226, 00184 Roma',checkin:'13:00',checkout:'10:00',
    rooms:'2 dormitorios: uno con 1 cama doble y 1 simple, otro con 2 simples. También tiene sofás cama. 1 baño.',cancel:'1/11',
    note:'Caro y Sonia se van el 8; el costo se divide igual entre las cinco.'},
-  {id:'sanmarcos',city:'madrid',name:'Airbnb Madrid · San Marcos',kind:'Airbnb',in:'2026-11-08',out:'2026-11-12',people:PAIR,total:486,status:'pending',when:'nov',card:'Caro',
+  {id:'sanmarcos',photos:["https://a0.muscache.com/im/pictures/85d7c633-981d-40a0-a6c8-f4d298abb1c3.jpg?im_w=720", "https://a0.muscache.com/im/pictures/c98bf3f1-0741-4055-804e-f054e3890153.jpg?im_w=720", "https://a0.muscache.com/im/pictures/1fd57479-a0dd-439d-a939-74721d2aa580.jpg?im_w=720"],city:'madrid',name:'Airbnb Madrid · San Marcos',kind:'Airbnb',in:'2026-11-08',out:'2026-11-12',people:PAIR,total:486,status:'pending',when:'nov',card:'Caro',
    url:'https://www.airbnb.com.ar/rooms/23430746',address:'Calle San Marcos 7, 28004 Madrid',checkin:'15:00 a 22:00',checkout:'12:00',
    rooms:'1 dormitorio con 1 sofá cama doble. 1 baño.',cancel:'3/11',note:'Llegar entre las 22 y las 24 cuesta €10 extra (€25 después de medianoche), en efectivo.'},
   {id:'sorrento',city:'sorrento',name:'Pusiso Sorrento',kind:'Booking',in:'2026-11-09',out:'2026-11-13',people:TRIO,total:490,status:'pending',when:'nov',card:'Tili',
@@ -366,7 +371,7 @@ const STAYS=[
 /* Traslados, entradas y gastos que se reparten */
 const MOVES=[
   {id:'iberia',title:'Vuelo Iberia IB0571 Madrid → París',date:'2026-11-03',people:ALL,total:415,status:'paid',card:'Caro',code:'K31DM',carrier:'Iberia IB0571',from:'Madrid T4',to:'París Orly T1',time:'09:55 → 12:00'},
-  {id:'par-rom',title:'Vuelo París → Roma',date:'2026-11-06',people:ALL,total:541,status:'paid',card:'Caro',code:null,carrier:null,from:'París',to:'Roma',time:null},
+  {id:'par-rom',title:'Vuelo Wizz Air W4 6062 París → Roma',date:'2026-11-06',people:ALL,total:541,status:'paid',card:'Caro',code:'RTQ86E',carrier:'Wizz Air W4 6062',from:'París Orly',to:'Roma Fiumicino T1',time:'09:55 → 12:00'},
   {id:'disney',title:'Entradas Disneyland',date:'2026-11-04',people:ALL,total:null,status:'paid',card:null},
   {id:'coliseo',title:'Entradas Coliseo · reserva OCO4939777',date:'2026-11-07',people:ALL,perPerson:20.40,status:'pending',when:'nov',card:'Caro'},
   {id:'fr9601',title:'Vuelo Ryanair FR9601 Roma → Madrid',date:'2026-11-08',people:PAIR,total:+(152.35*EUR_USD).toFixed(2),status:'paid',card:'Caro',code:'J9EWSR',carrier:'Ryanair FR9601',from:'Roma Fiumicino',to:'Madrid',time:'16:35 → 19:10',
@@ -409,7 +414,7 @@ const DAYS=[
   {date:'2026-11-04',cities:{mad:'paris',sor:'paris'},title:'Disneyland',all:{plan:['Día completo en Disneyland París.','Entradas ya compradas.']},sleep:{mad:'paris',sor:'paris'}},
   {date:'2026-11-05',cities:{mad:'paris',sor:'paris'},title:'París clásico',all:{plan:['Panteón y Barrio Latino.','Louvre y Ópera.','Caminata por el Sena.']},sleep:{mad:'paris',sor:'paris'}},
   {date:'2026-11-06',cities:{mad:'roma',sor:'roma'},title:'Llegamos a Roma: Vaticano',
-    all:{plan:['Check-out en París hasta las 11:00.','Check-in en Roma desde las 13:00.','Visita al Vaticano.'],moves:[{icon:'plane',text:'Vuelo París → Roma <span class="note">(aerolínea y horario a confirmar)</span>'}]},
+    all:{plan:['Salida temprano hacia Orly: dejar el departamento antes de ir al aeropuerto.','Check-in en Roma desde las 13:00.','Visita al Vaticano.'],moves:[{icon:'plane',text:'Wizz Air W4 6062 · París Orly <b class="mono">09:55</b> → Roma Fiumicino T1 <b class="mono">12:00</b> · reserva <span class="mono">RTQ86E</span>'}]},
     sleep:{mad:'roma',sor:'roma'}},
   {date:'2026-11-07',cities:{mad:'roma',sor:'roma'},title:'Fontana, Coliseo y Trastevere',
     all:{plan:['Mañana: Fontana di Trevi.','<b>15:00 · turno en el Coliseo.</b> Reserva <span class="mono">OCO4939777</span>; las entradas están en el grupo de WhatsApp.','Después, Trastevere.']},
@@ -440,7 +445,6 @@ const DAYS=[
 ];
 
 const TODO=[
-  '<b>Vuelo París → Roma (6/11):</b> falta aerolínea, horario y código de reserva.',
   '<b>Vuelta LATAM del 15/11 (Naty, Tili y Loli):</b> faltan los números de vuelo y si hay escala.',
   '<b>Vuelo del 13/11 (Naty, Tili y Loli):</b> ¿sale de Fiumicino o de Ciampino?',
   '<b>Sorrento y Madrid final:</b> faltan dirección, link, horarios de check-in y check-out y camas.',
@@ -628,6 +632,7 @@ function renderStays(){
     const missing='<span class="note">Falta cargar</span>';
     const depositLine=s.deposit?`<p class="note">Seña ya pagada: ${fmt(s.deposit)} (${fmt(s.deposit/s.people.length)} c/u). Resta ${fmt(s.total-s.deposit)}.</p>`:'';
     return `<article class="stay${includes(s.people)?'':' dim'}" id="stay-${s.id}" style="--cc:var(--c-${s.city})">
+      ${s.photos?`<a class="stay-photos" href="${s.url}" target="_blank" rel="noopener noreferrer" aria-label="Fotos de ${esc(s.name)}">${s.photos.map((u,i)=>`<img src="${u}" alt="${esc(s.name)}, foto ${i+1}" loading="lazy" referrerpolicy="no-referrer" onerror="photoFail(this)">`).join('')}</a>`:''}
       <div class="stay-top"><div><span class="tag">${CITY[s.city].name}</span></div>${statusChip(s)}</div>
       <div><h3>${esc(s.name)}</h3><div class="when">${short(s.in)} → ${short(s.out)} · ${n} ${n===1?'noche':'noches'}</div></div>
       <dl class="facts">
@@ -650,6 +655,8 @@ function renderStays(){
   }).join('');
 }
 
+/* Si una foto no carga, se quita; si no carga ninguna, se quita el bloque */
+function photoFail(img){const box=img.parentNode;img.remove();if(!box)return;const n=box.querySelectorAll('img').length;if(!n)box.remove();else box.className='stay-photos n'+n;}
 /* Todo lo que se reparte, en una sola lista */
 function allItems(){
   const stays=STAYS.flatMap(s=>{
