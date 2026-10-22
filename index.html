@@ -285,17 +285,14 @@ footer .wrap{padding-block:18px 28px;color:var(--muted);font-size:13px;display:f
   <section id="recorrido" aria-labelledby="h-recorrido">
     <div class="sec-head">
       <h2 id="h-recorrido">Recorrido</h2>
-      <p>Viajamos las cinco juntas hasta Roma. El 8 de noviembre Caro y Sonia vuelan a Madrid y el 12 vuelven a casa. Naty, Tili y Loli siguen a Sorrento, pasan por Madrid del 13 al 15 y vuelven el 16.</p>
     </div>
     <div class="route-box" id="route"></div>
-    <div class="route-legend" id="route-legend"></div>
     <div class="cities" id="cities"></div>
   </section>
 
   <section id="dias" aria-labelledby="h-dias">
     <div class="sec-head">
       <h2 id="h-dias">Día por día</h2>
-      <p id="dias-sub">Qué hacemos, cómo nos movemos y dónde dormimos cada noche.</p>
     </div>
     <div class="days" id="days"></div>
   </section>
@@ -374,8 +371,10 @@ const STAYS=[
   {id:'sanmarcos',photos:["https://a0.muscache.com/im/pictures/85d7c633-981d-40a0-a6c8-f4d298abb1c3.jpg?im_w=720", "https://a0.muscache.com/im/pictures/c98bf3f1-0741-4055-804e-f054e3890153.jpg?im_w=720", "https://a0.muscache.com/im/pictures/1fd57479-a0dd-439d-a939-74721d2aa580.jpg?im_w=720"],city:'madrid',name:'Airbnb Madrid · San Marcos',kind:'Airbnb',in:'2026-11-08',out:'2026-11-12',people:PAIR,total:486,status:'pending',when:'nov',card:'Caro',
    url:'https://www.airbnb.com.ar/rooms/23430746',address:'Calle San Marcos 7, 28004 Madrid',checkin:'15:00 a 22:00',checkout:'12:00',
    rooms:'1 dormitorio con 1 sofá cama doble. 1 baño.',cancel:'3/11',note:'Llegar entre las 22 y las 24 cuesta €10 extra (€25 después de medianoche), en efectivo.'},
-  {id:'sorrento',city:'sorrento',name:'Pusiso Sorrento',kind:'Booking',in:'2026-11-09',out:'2026-11-13',people:TRIO,total:490,status:'pending',when:'nov',card:'Tili',
-   url:'https://www.booking.com/hotel/it/pusiso-sorrento-de-vivo-realty.es.html',address:null,checkin:null,checkout:null,rooms:null,cancel:null},
+  {id:'sorrento',photos:["https://cf.bstatic.com/xdata/images/hotel/max1024x768/690857838.jpg?k=123f743e33e6a329bafd535d1d16bef28dd5950a6a5a65cb328ae0f9ff08f361&o=", "https://cf.bstatic.com/xdata/images/hotel/max1024x768/690857950.jpg?k=372a16c287e64eddb1b5b7fcd0ad49367d789a27d239beaf5b10d05b8181bfed&o=", "https://cf.bstatic.com/xdata/images/hotel/max1024x768/690858010.jpg?k=a4b8601eaec15dcd451d3a9325226f40c9f38e2bc07eac903db3316aae30b714&o="],city:'sorrento',name:'De Vivo Realty · Pusisò Sorrento',kind:'Booking',in:'2026-11-09',out:'2026-11-13',people:TRIO,total:490,status:'pending',when:'nov',card:'Tili',
+   url:'https://www.booking.com/hotel/it/pusiso-sorrento-de-vivo-realty.es.html?checkin=2026-11-09&checkout=2026-11-13&group_adults=3&no_rooms=2',address:'Isolato 2 5, 80067 Sorrento',checkin:'14:00 a 21:00',checkout:'hasta las 10:00',
+   rooms:'2 habitaciones con baño privado. Según Booking, las dobles tienen 1 cama doble grande y la triple, 1 doble y 1 individual.',cancel:null,
+   note:'A 250 m de la estación Circumvesuviana de Sorrento, la del tren que va a Nápoles. Tiene ascensor y aire acondicionado.'},
   {id:'mad2',city:'madrid',name:'Airbnb Madrid (final)',kind:'Airbnb',in:'2026-11-13',out:'2026-11-15',people:TRIO,total:371.35,status:'pending',when:'dic',card:'Tili',
    url:null,address:null,checkin:null,checkout:null,rooms:null,cancel:null,note:'Llegan a Madrid a las 21:20: avisar al anfitrión.'}
 ];
@@ -437,7 +436,7 @@ const DAYS=[
     sleep:{mad:'sanmarcos',sor:'roma'}},
   {date:'2026-11-09',photos:{'mad':'segovia','sor':'sorrento'},cities:{mad:'segovia',sor:'sorrento'},title:'Segovia y rumbo a Sorrento',titles:{mad:'Escapada a Segovia',sor:'Rumbo a Sorrento'},
     mad:{plan:['Día en Segovia (plan tentativo).','Vuelven a dormir a Madrid.']},
-    sor:{plan:['Check-out en Roma hasta las 10:00.','Sorrento y descanso.'],moves:[{icon:'train',text:'Tren Roma → Nápoles → Sorrento <span class="note">(a comprar)</span>'}]},
+    sor:{plan:['Check-out en Roma hasta las 10:00.','Check-in en Sorrento de 14:00 a 21:00.','Sorrento y descanso.'],moves:[{icon:'train',text:'Tren Roma → Nápoles → Sorrento <span class="note">(a comprar)</span>'}]},
     sleep:{mad:'sanmarcos',sor:'sorrento'}},
   {date:'2026-11-10',photos:{'mad':'toledo','sor':'positano'},cities:{mad:'toledo',sor:'sorrento'},title:'Toledo y Costa Amalfitana',titles:{mad:'Escapada a Toledo',sor:'Costa Amalfitana'},
     mad:{plan:['Día en Toledo (plan tentativo).','Vuelven a dormir a Madrid.']},sor:{plan:['Positano y Amalfi.']},sleep:{mad:'sanmarcos',sor:'sorrento'}},
@@ -449,7 +448,7 @@ const DAYS=[
     sleep:{mad:null,sor:'sorrento'},sleepText:{mad:'Noche en el avión'}},
   {date:'2026-11-13',photos:{'mad':'obelisco','sor':'sol'},cities:{mad:'ba',sor:'madrid'},title:'De Sorrento a Madrid',titles:{mad:'Llegada a Buenos Aires',sor:'De Sorrento a Madrid'},
     mad:{plan:['Escala de 2 h 15 min en São Paulo.','Llegada a Aeroparque a las 10:30.'],moves:[{icon:'plane',text:'LATAM LA8192 · São Paulo T3 <b class="mono">07:35</b> → Aeroparque <b class="mono">10:30</b>'}]},
-    sor:{plan:['Salida de Sorrento en tren hacia Roma.','Llegada a Madrid de noche: avisar al Airbnb.'],moves:[{icon:'train',text:'Sorrento → Nápoles y tren Trenitalia Nápoles → Roma <span class="note">(a comprar · €14 c/u, unos USD 15,72)</span>'},{icon:'plane',text:'Ryanair · Roma <b class="mono">18:45</b> → Madrid <b class="mono">21:20</b>'}]},
+    sor:{plan:['Check-out en Sorrento hasta las 10:00.','Salida en tren hacia Roma.','Llegada a Madrid de noche: avisar al Airbnb.'],moves:[{icon:'train',text:'Sorrento → Nápoles y tren Trenitalia Nápoles → Roma <span class="note">(a comprar · €14 c/u, unos USD 15,72)</span>'},{icon:'plane',text:'Ryanair · Roma <b class="mono">18:45</b> → Madrid <b class="mono">21:20</b>'}]},
     sleep:{mad:null,sor:'mad2'},sleepText:{mad:'En casa'}},
   {date:'2026-11-14',photos:{'sor':'palacio'},cities:{sor:'madrid'},title:'Últimas compras',sor:{plan:['Compras y descanso.','Armar las valijas.']},sleep:{sor:'mad2'}},
   {date:'2026-11-15',photos:{'sor':'barajas'},cities:{sor:'vuelo'},title:'Vuelta a casa',sor:{plan:['Salida al aeropuerto de Barajas con tiempo.'],moves:[{icon:'plane',text:'LATAM · Madrid <b class="mono">13:50</b> → Ezeiza'}]},sleep:{sor:null},sleepText:{sor:'Noche en el avión'}},
@@ -493,7 +492,7 @@ const photoOf=(day,r)=>day.photos?(day.photos[r]||day.photos.all):null;
 const TODO=[
   '<b>Vuelta LATAM del 15/11 (Naty, Tili y Loli):</b> faltan los números de vuelo y si hay escala.',
   '<b>Vuelo del 13/11 (Naty, Tili y Loli):</b> ¿sale de Fiumicino o de Ciampino?',
-  '<b>Sorrento y Madrid final:</b> faltan dirección, link, horarios de check-in y check-out y camas.',
+  '<b>Sorrento:</b> confirmar qué 2 habitaciones se reservaron (doble, doble deluxe con balcón o triple).','<b>Madrid final:</b> faltan dirección, link, horarios de check-in y check-out y camas.',
   '<b>Trenes de Sorrento:</b> comprar Roma → Sorrento (9/11, USD 106,60 c/u de referencia) y Nápoles → Roma (13/11). Falta el precio del tramo Sorrento → Nápoles.'
 ];
 
@@ -619,7 +618,6 @@ function renderRoute(){
     ${mid(290,'paris','París','3 – 6 nov')}
     ${mid(430,'roma','Roma','6 – 8/9 nov')}
   </svg>`;
-  document.getElementById('route-legend').innerHTML=`<span><b>Sevilla</b>: excursión de un día desde Madrid para las cinco (domingo 1).</span><span><b>Florencia</b>: desde Roma para Naty, Tili y Loli (domingo 8).</span><span><b>Segovia y Toledo</b>: desde Madrid para Caro y Sonia (9 y 10).</span>`;
   const cards=[
     {k:'madrid',cc:'madrid',name:'Madrid',txt:'Todas del 31 oct al 3 nov, con un día en Sevilla. Caro y Sonia del 8 al 12; Naty, Tili y Loli del 13 al 15.',routes:['mad','sor']},
     {k:'paris',cc:'paris',name:'París',txt:'3 – 6 nov. Incluye un día en Disneyland.',routes:['mad','sor']},
@@ -632,9 +630,6 @@ function renderRoute(){
 
 function renderDays(){
   const mine=routesForWho();
-  document.getElementById('dias-sub').textContent=who==='all'
-    ?'Qué hacemos, cómo nos movemos y dónde dormimos cada noche. Desde el 8 se muestran las dos rutas.'
-    :`El viaje de ${nameOf(who)}: qué hace, cómo se mueve y dónde duerme cada noche.`;
   document.getElementById('days').innerHTML=DAYS.map(day=>{
     const vis=dayRoutes(day).filter(r=>mine.includes(r));
     if(!vis.length)return '';
