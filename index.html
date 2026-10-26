@@ -356,7 +356,7 @@ const EUR_USD=1.12294; /* cotización del 20/10/2026 */
 
 /* status: paid | pending | estimate | unknown */
 const STAYS=[
-  {id:'hostel',photos:["https://a0.muscache.com/im/pictures/hosting/Hosting-1401979060197135996/original/64935f88-3704-4a33-8c78-386dcf2cd793.jpeg?im_w=720", "https://a0.muscache.com/im/pictures/hosting/Hosting-1401979060197135996/original/780b3e13-95c5-47e4-9dde-e08e26c3de8d.jpeg?im_w=720", "https://a0.muscache.com/im/pictures/hosting/Hosting-1401979060197135996/original/2ad74357-fd61-487d-ad8f-8a0b9a477c9f.jpeg?im_w=720"],city:'madrid',name:'Airbnb Madrid · Plaza de la Villa',kind:'Airbnb',in:'2026-10-31',out:'2026-11-01',people:ALL,total:355.58,status:'paid',card:'Caro',cardName:'Mastercard de Caro',
+  {id:'hostel',photos:["https://a0.muscache.com/im/pictures/hosting/Hosting-1401979060197135996/original/64935f88-3704-4a33-8c78-386dcf2cd793.jpeg?im_w=720", "https://a0.muscache.com/im/pictures/hosting/Hosting-1401979060197135996/original/780b3e13-95c5-47e4-9dde-e08e26c3de8d.jpeg?im_w=720", "https://a0.muscache.com/im/pictures/hosting/Hosting-1401979060197135996/original/2ad74357-fd61-487d-ad8f-8a0b9a477c9f.jpeg?im_w=720"],city:'madrid',name:'Airbnb Madrid · Plaza de la Villa',kind:'Airbnb',in:'2026-10-31',out:'2026-11-01',people:ALL,total:355.58,deposit:59.05,depositLabel:'A favor: seña del Cats Hostel que ya pagaron y Hostelworld le devuelve a Caro',status:'pending',when:'nov',card:'Caro',cardName:'Mastercard de Caro',
    url:'https://www.airbnb.com.ar/rooms/1401979060197135996',address:'Calle Mayor, 28013 Madrid',checkin:'desde las 15:00',checkout:'antes de las 12:00',
    rooms:'2 dormitorios con cama queen y 2 sofás cama individuales en el living. 2 baños.',cancel:null,
    note:'La dirección exacta y las instrucciones de entrada llegan por Airbnb cerca de la fecha. Las llaves se retiran en un punto cercano. Hay que mostrar DNI o pasaporte. Queda a 200 m de la Plaza Mayor.'},
@@ -390,6 +390,7 @@ const STAYS=[
 const MOVES=[
   {id:'iberia',title:'Vuelo Iberia IB0571 Madrid → París',date:'2026-11-03',people:ALL,total:415,status:'paid',card:'Caro',code:'K31DM',carrier:'Iberia IB0571',from:'Madrid T4',to:'París Orly T1',time:'09:55 → 12:00'},
   {id:'par-rom',title:'Vuelo Wizz Air W4 6062 París → Roma',date:'2026-11-06',people:ALL,total:541,status:'paid',card:'Caro',code:'RTQ86E',carrier:'Wizz Air W4 6062',from:'París Orly',to:'Roma Fiumicino T1',time:'09:55 → 12:00'},
+  {id:'bigbus',title:'Big Bus Madrid',date:'2026-11-02',people:ALL,perPerson:+(30*EUR_USD).toFixed(2),status:'estimate',card:null,note:'€30 por persona, pasado a dólares al cambio del 20/10.'},
   {id:'disney',title:'Entradas Disneyland',date:'2026-11-04',people:ALL,total:null,status:'paid',card:null},
   {id:'coliseo',title:'Entradas Coliseo · reserva OCO4939777',date:'2026-11-07',people:ALL,perPerson:20.40,status:'pending',when:'nov',card:'Caro'},
   {id:'fr9601',title:'Vuelo Ryanair FR9601 Roma → Madrid',date:'2026-11-08',people:PAIR,total:+(152.35*EUR_USD).toFixed(2),status:'paid',card:'Caro',code:'J9EWSR',carrier:'Ryanair FR9601',from:'Roma Fiumicino',to:'Madrid',time:'16:35 → 19:10',
@@ -424,9 +425,9 @@ const DAYS=[
   {date:'2026-11-01',photos:{'all':'sevilla'},cities:{mad:'sevilla',sor:'sevilla'},title:'Día entero en Sevilla',
     all:{plan:['Check-out del Airbnb de Calle Mayor antes de las 12:00.','Día entero paseando por Sevilla.','A la vuelta, check-in en el Departamento Culture (Hernán Cortés) (desde las 15:00).'],moves:[{icon:'train',text:'Madrid ↔ Sevilla <span class="note">(traslado a confirmar)</span>'}]},
     sleep:{mad:'mad1',sor:'mad1'}},
-  {date:'2026-11-02',photos:{'all':'plazamayor'},cities:{mad:'madrid',sor:'madrid'},title:'Madrid a pie',all:{plan:['Recorrido por la ciudad.']},sleep:{mad:'mad1',sor:'mad1'}},
+  {date:'2026-11-02',photos:{'all':'plazamayor'},cities:{mad:'madrid',sor:'madrid'},title:'Madrid a pie',all:{plan:['Recorrido por la ciudad.','Big Bus por Madrid (domingo o lunes): €30 por persona, unos USD 33,69.']},sleep:{mad:'mad1',sor:'mad1'}},
   {date:'2026-11-03',photos:{'all':'eiffel'},cities:{mad:'paris',sor:'paris'},title:'Bonjour, París',
-    all:{plan:['Check-in en París desde las 16:00.','Torre Eiffel, Arco del Triunfo y Campos Elíseos.'],
+    all:{plan:['Check-in en París desde las 16:00.','Torre Eiffel, Arco del Triunfo y Campos Elíseos.','Paseo en barco por el Sena. Se paga con los USD 100 a favor que tiene Tili en Airbnb.'],
       moves:[{icon:'plane',text:'Iberia IB0571 · Madrid T4 <b class="mono">09:55</b> → París Orly T1 <b class="mono">12:00</b>'}]},
     sleep:{mad:'paris',sor:'paris'}},
   {date:'2026-11-04',photos:{'all':'disney'},cities:{mad:'paris',sor:'paris'},title:'Disneyland',all:{plan:['Día completo en Disneyland París.','Entradas ya compradas.']},sleep:{mad:'paris',sor:'paris'}},
@@ -681,7 +682,7 @@ function renderStays(){
   document.getElementById('stays').innerHTML=STAYS.map(s=>{
     const n=nightsBetween(s.in,s.out);
     const missing='<span class="note">Falta cargar</span>';
-    const depositLine=s.deposit?`<p class="note">Seña ya pagada: ${fmt(s.deposit)} (${fmt(s.deposit/s.people.length)} c/u). Resta ${fmt(s.total-s.deposit)}.</p>`:'';
+    const depositLine=s.deposit?`<p class="note">${s.depositLabel||'Seña ya pagada'}: ${fmt(s.deposit)} (${fmt(s.deposit/s.people.length)} c/u). Resta ${fmt(s.total-s.deposit)}.</p>`:'';
     return `<article class="stay${includes(s.people)?'':' dim'}" id="stay-${s.id}" style="--cc:var(--c-${s.city})">
       ${s.photos?`<a class="stay-photos" href="${s.url}" target="_blank" rel="noopener noreferrer" aria-label="Fotos de ${esc(s.name)}">${s.photos.map((u,i)=>`<img src="${u}" alt="${esc(s.name)}, foto ${i+1}" loading="lazy" referrerpolicy="no-referrer" onerror="photoFail(this)">`).join('')}</a>`:''}
       <div class="stay-top"><div><span class="tag">${CITY[s.city].name}</span></div>${statusChip(s)}</div>
@@ -715,7 +716,7 @@ function allItems(){
   const stays=STAYS.flatMap(s=>{
     const base={...s,title:s.name+' · '+short(s.in)+' → '+short(s.out),date:s.in};
     if(!s.deposit)return [base];
-    return [{...base,id:s.id+'-sena',title:s.name+' · seña',total:s.deposit,status:'paid'},
+    return [{...base,id:s.id+'-sena',title:s.name+' · '+(s.depositLabel?'a favor del Cats Hostel':'seña'),total:s.deposit,status:'paid'},
             {...base,id:s.id+'-saldo',title:s.name+' · saldo',total:+(s.total-s.deposit).toFixed(2)}];
   });
   return [...stays,...MOVES].sort((a,b)=>a.date.localeCompare(b.date));
@@ -737,12 +738,12 @@ function renderCuentas(){
   if(who==='all'){
     sub.textContent='Lo que falta pagar, en dólares. Lo que ya está pagado no aparece. Elegí tu nombre arriba para ver tu detalle.';
     const rows=PEOPLE.map(p=>{const t=personTotals(p.id);return `<tr><td><button class="btn" data-pick="${p.id}">${p.name}</button><small>${p.route==='mad'?'Ruta Madrid':'Ruta Sorrento'}</small></td><td class="r">${fmt(t.pending)}</td><td class="r">${fmt(t.estimate)}</td><td class="r"><b>${fmt(t.pending+t.estimate)}</b></td></tr>`;}).join('');
-    const matrix=allItems().filter(due).map(x=>`<tr><td>${esc(x.title)}<small>${statusChip(x)}${x.card?' · Visa '+x.card:''}</small></td>${PEOPLE.map(p=>`<td class="r">${x.people.includes(p.id)?(share(x)==null?'<span class="note">?</span>':nf2.format(share(x))):'<span class="note">—</span>'}</td>`).join('')}</tr>`).join('');
+    const matrix=allItems().filter(due).map(x=>`<tr><td>${esc(x.title)}<small>${statusChip(x)}${x.card?' · tarjeta de '+x.card:''}</small></td>${PEOPLE.map(p=>`<td class="r">${x.people.includes(p.id)?(share(x)==null?'<span class="note">?</span>':nf2.format(share(x))):'<span class="note">—</span>'}</td>`).join('')}</tr>`).join('');
     body.innerHTML=`
       <div class="table-wrap"><table>
         <thead><tr><th>Viajera</th><th class="r">A pagar</th><th class="r">Estimado, sin comprar</th><th class="r">Total que falta</th></tr></thead>
         <tbody>${rows}</tbody></table></div>
-      <p class="note">“A pagar” son los alojamientos y las entradas del Coliseo, ya reservados, que se cobran en noviembre (el Madrid final, en diciembre). “Estimado” son los trenes que todavía hay que comprar. No incluye el tramo Sorrento → Nápoles del 13, que aún no tiene precio.</p>
+      <p class="note">“A pagar” son los alojamientos (al de la primera noche en Madrid ya se le descontaron los USD 59,05 a favor del Cats Hostel) y las entradas del Coliseo, ya reservados, que se cobran en noviembre (el Madrid final, en diciembre). “Estimado” son los trenes y el Big Bus de Madrid, que todavía hay que comprar. No incluye el tramo Sorrento → Nápoles del 13, que aún no tiene precio.</p>
       <h3 class="label">Detalle por gasto (USD por persona)</h3>
       <div class="table-wrap"><table>
         <thead><tr><th>Gasto</th>${PEOPLE.map(p=>`<th class="r">${p.name}</th>`).join('')}</tr></thead>
@@ -753,7 +754,7 @@ function renderCuentas(){
   const t=personTotals(who);
   sub.textContent=`Lo que le falta pagar a ${nameOf(who)}, en dólares. Lo que ya está pagado no aparece.`;
   const items=allItems().filter(x=>x.people.includes(who)&&due(x));
-  const cards=Object.entries(t.card).map(([k,v])=>`<div>${k===nameOf(who)?'Va en <b>tu propia Visa</b>':'Tu parte de lo que va en '+(k==='a definir'?'una tarjeta <b>a definir</b>':'la <b>Visa de '+k+'</b>')}: <b class="num">${fmt(v)}</b></div>`).join('');
+  const cards=Object.entries(t.card).map(([k,v])=>`<div>${k===nameOf(who)?'Va en <b>tus propias tarjetas</b>':'Tu parte de lo que va en '+(k==='a definir'?'una tarjeta <b>a definir</b>':'las <b>tarjetas de '+k+'</b>')}: <b class="num">${fmt(v)}</b></div>`).join('');
   body.innerHTML=`
     <div class="tiles">
       <div class="tile"><span>A pagar (ya reservado)</span><strong class="num">${fmt0(t.pending)}</strong><span class="num">${fmt(t.pending)}</span></div>
@@ -763,7 +764,7 @@ function renderCuentas(){
     <div class="cards-split">${cards}${t.unknown.length?`<div class="note">Todavía sin precio: ${t.unknown.map(esc).join(' · ')}.</div>`:''}</div>
     <div class="table-wrap"><table>
       <thead><tr><th>Gasto</th><th>Estado</th><th class="r">Total</th><th class="r">Tu parte</th></tr></thead>
-      <tbody>${items.map(x=>`<tr><td>${esc(x.title)}<small>${x.people.length===5?'Entre las cinco':'Entre '+listNames(x.people)}${x.card?' · Visa de '+x.card:''}${x.note&&!x.in?' · '+esc(x.note):''}</small></td><td>${statusChip(x)}</td><td class="r">${x.total!=null?fmt(x.total):(x.perPerson!=null?'c/u':'—')}</td><td class="r"><b>${share(x)==null?'?':fmt(share(x))}</b></td></tr>`).join('')}</tbody>
+      <tbody>${items.map(x=>`<tr><td>${esc(x.title)}<small>${x.people.length===5?'Entre las cinco':'Entre '+listNames(x.people)}${x.cardName?' · '+x.cardName:(x.card?' · Visa de '+x.card:'')}${x.note&&!x.in?' · '+esc(x.note):''}</small></td><td>${statusChip(x)}</td><td class="r">${x.total!=null?fmt(x.total):(x.perPerson!=null?'c/u':'—')}</td><td class="r"><b>${share(x)==null?'?':fmt(share(x))}</b></td></tr>`).join('')}</tbody>
       <tfoot><tr><td colspan="3">Total que falta</td><td class="r">${fmt(t.pending+t.estimate)}</td></tr></tfoot>
     </table></div>`;
 }
